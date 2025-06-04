@@ -16,7 +16,7 @@ const authenticateUser = async (username: string, password: string) => {
     if (user) {
         const userData: UserDataInterface = {
             id: user.id,
-            email: user.username,
+            email: user.email,
             firstName: user.firstName,
             lastName: user.lastName
         };
