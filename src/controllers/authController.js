@@ -2,14 +2,19 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const DEMO_USER = {
+    id: "88619348-dbd9-4334-9290-241a7f17dd31",
     username: "demo@example.org",
-    password: "test"
+    password: "test",
+    firstName: "John",
+    lastName: "Doe",
 };
 
 const authenticateUser = (username, password) => {
     if (username === DEMO_USER.username && password === DEMO_USER.password) {
+        userData = { id: DEMO_USER.id, username: DEMO_USER.username, firstName: DEMO_USER.firstName, lastName: DEMO_USER.lastName }
+            
         token = jwt.sign(
-            { username },
+            { userData },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
