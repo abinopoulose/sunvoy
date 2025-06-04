@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
+import { Response, NextFunction } from "express";
+import { UserRequest } from "../interfaces/request.interface";
 require('dotenv').config();
 
-const authMiddleware = (req, res, next) => {
+export const authMiddleware = (req: UserRequest, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; 
 
@@ -14,7 +16,7 @@ const authMiddleware = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
+        req.userData = decoded.userData;
         next();
     } catch (error) {
         return res.status(401).json({
@@ -24,4 +26,3 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-module.exports = authMiddleware
