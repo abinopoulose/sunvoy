@@ -1,17 +1,9 @@
-const getSettings = (req, res) => {
+const settingsController = (req, res) => {
     try {
-        return res.json({
-            success: true,
-            data: req.user?.userData
-        });
+        return res.json(req.user?.userData);
     } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+        return res.status(500).json({message: 'Internal server error'});
     }
 };
 
-module.exports = {
-    getSettings
-}; 
+module.exports = settingsController

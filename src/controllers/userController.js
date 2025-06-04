@@ -1,24 +1,16 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const getUsers = async (req, res) => {
+const userController = async (req, res) => {
     try {
-        const usersPath = path.join(__dirname, '../../src/constant/users.json');
+        const usersPath = path.join(__dirname, '../constant/users.json');
         const usersData = await fs.readFile(usersPath, 'utf8');
         const users = JSON.parse(usersData);
         
-        return res.json({
-            success: true,
-            data: users
-        });
+        return res.json(users);
     } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: 'Error fetching users'
-        });
+        return res.status(500).json({message: 'Error fetching users'});
     }
 };
 
-module.exports = {
-    getUsers
-}; 
+module.exports = userController
